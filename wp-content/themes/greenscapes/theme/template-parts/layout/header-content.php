@@ -1,47 +1,27 @@
-<?php
-/**
- * Template part for displaying the header content
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package greenscapes
- */
+<header id="masthead" class="fixed top-0 bg-cover bg-center relative" style="background-image: url('/wp-content/themes/greenscapes/theme/hero-blue.webp');">
+  <div class="container border-b-1 mx-auto px-4 flex items-center justify-between py-4">
+    <!-- Site Title / Logo -->
+    <div>
+      <h1 aria-label="<?php bloginfo('name'); ?>">
+        <img class="max-w-[150px] md:max-w-[200px]" src="/wp-content/themes/greenscapes/theme/logo-alpha.webp" />
+      </h1>
+    </div>
 
-?>
+    <!-- Desktop Navigation -->
+    <nav id="nav_primary" class="hidden md:flex">
+      <?php wp_nav_menu(array('theme_location' => 'nav', 'menu_id' => 'desktop_nav')); ?>
+    </nav>
 
-<header id="masthead">
+    <!-- Mobile Menu Toggle -->
+    <button id="menu-toggle" class="md:hidden text-white cursor-pointer">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+  </div>
 
-	<div>
-		<?php
-		if ( is_front_page() ) :
-			?>
-			<h1><?php bloginfo( 'name' ); ?></h1>
-			<?php
-		else :
-			?>
-			<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php
-		endif;
-
-		$greenscapes_description = get_bloginfo( 'description', 'display' );
-		if ( $greenscapes_description || is_customize_preview() ) :
-			?>
-			<p><?php echo $greenscapes_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-		<?php endif; ?>
-	</div>
-
-	<nav id="site-navigation" aria-label="<?php esc_attr_e( 'Main Navigation', 'greenscapes' ); ?>">
-		<button aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'greenscapes' ); ?></button>
-
-		<?php
-		wp_nav_menu(
-			array(
-				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-				'items_wrap'     => '<ul id="%1$s" class="%2$s" aria-label="submenu">%3$s</ul>',
-			)
-		);
-		?>
-	</nav><!-- #site-navigation -->
-
-</header><!-- #masthead -->
+  <!-- Mobile Menu -->
+  <div id="nav_mobile" class="md:hidden bg-primary text-white p-4 hidden flex-col items-start space-y-2">
+    <?php wp_nav_menu(array('theme_location' => 'nav', 'menu_id' => 'mobile_nav')); ?>
+  </div>
+</header>

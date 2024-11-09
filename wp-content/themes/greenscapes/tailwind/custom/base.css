@@ -14,3 +14,68 @@
 body {
 	@apply bg-background text-foreground font-sans;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply !text-foreground font-serif;
+}
+#desktop_nav {
+	@apply flex space-x-4;
+}
+
+#desktop_nav a {
+	@apply text-white py-4 px-6 hover:text-white/60 transition;
+}
+
+#desktop_nav > li:last-child > a {
+	@apply border-[1px] hover:bg-white hover:text-black transition rounded-full;
+}
+
+#desktop_nav a {
+	@apply cursor-pointer;
+}
+
+#desktop_nav .menu-item-has-children > a:after {
+	content: "▼";
+	@apply inline-block text-xs ml-2;
+}
+
+#desktop_nav .menu-item-has-children ul {
+	@apply hidden max-md:pl-4 bg-primary text-white md:rounded md:shadow-lg w-full relative md:w-auto md:absolute;
+}
+
+#desktop_nav .menu-item-has-children ul li a {
+	@apply text-white py-2 px-4 hover:text-white/60;
+}
+
+/* Mobile Menu */
+#nav_mobile a {
+	@apply text-white hover:text-white/60 transition;
+}
+
+#nav_mobile .menu-item-has-children ul {
+	@apply hidden;
+}
+
+.menu-item a {
+	@apply block py-2 px-4;
+}
+
+#footer_nav a {
+	@apply text-xl text-white max-md:pl-0;
+}
+
+#footer_nav .menu-item-has-children .sub-menu a {
+	@apply text-sm;
+}
+#footer_nav {
+	@apply flex w-full flex-col flex-wrap justify-end gap-8 md:flex-row lg:inline-flex lg:flex-1 lg:flex-row;
+}
+
+/* #footer_nav {
+	@apply flex max-w-[170px] flex-col gap-3 lg:w-[140px];
+} */

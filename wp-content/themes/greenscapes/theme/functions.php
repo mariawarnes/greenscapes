@@ -195,3 +195,184 @@ require get_template_directory() . '/inc/template-tags.php';
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
+
+
+// Typical Helpers /////////////////////////////////////////////////
+
+// Site Title
+define('SITE_TITLE', get_bloginfo('name'));
+
+// Site Title
+define('SITE_DESC', get_bloginfo('description'));
+
+// Site URL
+define('SITE_URL', get_bloginfo('url'));
+
+// Template Path
+define('TEMP_PATH', get_bloginfo('template_directory').'/resources');
+
+
+// Register WP Features ////////////////////////////////////////////
+
+// Add Thumbnails
+add_theme_support( 'post-thumbnails' );
+
+// Register Nav
+register_nav_menus(
+  array(
+    'nav' => __('Primary Nav')
+  )
+);
+
+// Custom Taxonomies ///////////////////////////////////////////////
+
+add_action('init', 'create_taxonomy');
+function create_taxonomy() {
+
+  $custom_taxonomies = array(
+    "work" => array(
+      "for"    => "work",
+      "single" => "Work",
+      "plural" => "Work",
+      "slug"   => "work"
+    ),
+    "services" => array(
+      "for"    => "services",
+      "single" => "Service",
+      "plural" => "Services",
+      "slug"   => "services"
+    )
+  );
+
+  foreach ($custom_taxonomies as $tax => $val) {
+  	register_taxonomy($tax, $val['for'], array(
+  	  'hierarchical'      => (array_key_exists('hierarchical', $val)) ? $val['hierarchical'] : true,
+  		'show_ui'           => true,
+  		'show_admin_column' => true,
+  		'query_var'         => true,
+  		'rewrite'           => array(
+  	    'slug' => (array_key_exists('slug', $val)) ? $val['slug'] : $tax,
+  	  ),
+  		'labels'            => array(
+    		'name'              => _x($val['plural'],  $val['single'] . ' Plural Label', 'Functions'),
+    		'singular_name'     => _x($val['single'],  $val['single'] . ' Singular Label', 'Functions'),
+    		'menu_name'         => _x($val['plural'],  $val['single'] . ' Plural Label', 'Functions'),
+    		'search_items'      => __( 'Search ' . $val['plural']),
+    		'all_items'         => __( 'All ' . $val['plural']),
+    		'parent_item'       => __( 'Parent ' . $val['single']),
+    		'parent_item_colon' => __( 'Parent ' . $val['single'] . ':' ),
+    		'edit_item'         => __( 'Edit ' . $val['single']),
+    		'update_item'       => __( 'Update ' . $val['single']),
+    		'add_new_item'      => __( 'Add New ' . $val['single']),
+    		'new_item_name'     => __( 'New ' . $val['single'] . ' Name' ),
+    	),
+    ));
+  }
+}
+
+// Custom Post Types ///////////////////////////////////////////////
+
+add_action('init', 'create_post_type');
+function create_post_type() {
+
+  $custom_post_types = array(
+    "work" => array(
+      "single"    => "Work",
+      "plural"    => "Work",
+      "menu_icon" => "dashicons-portfolio",
+      "slug"      => "work",
+      "supports"  => array("title", "editor", "thumbnail", "excerpt", "page-attributes")
+    ),
+    "services" => array(
+      "single"    => "Service",
+      "plural"    => "Services",
+      "menu_icon" => "dashicons-hammer",
+      "slug"      => "services",
+      "supports"  => array("title", "editor", "thumbnail", "excerpt", "page-attributes")
+    ),
+  );
+
+  foreach ($custom_post_types as $type => $val) {
+    register_post_type($type, array(
+        'label'                 => $val["plural"],
+        'description'           => '',
+        'public'                => true,
+        'menu_icon'             => (array_key_exists('menu_icon', $val)) ? $val['menu_icon'] : 'dashicons-star-filled',
+        'capability_type'       => 'post',
+        'hierarchical'          => false,
+        'has_archive'           => true,
+        'rewrite'               => array(
+          'slug'                => (array_key_exists('slug', $val)) ? $val['slug'] : $type,
+          'with_front'          => '0'
+        ),
+        'query_var'             => true,
+        'menu_position'         => (array_key_exists('menu_position', $val)) ? $val['menu_position'] : 5,
+        'supports'              => $val["supports"],
+        'labels'                => array (
+          'name'                => _x($val["plural"],  $val["single"] . " Singular Label", "Functions"),
+          'singular_name'       => _x($val["single"],  $val["single"] . " Singular Label", "Functions"),
+          'menu_name'           => _x($val["plural"],  $val["single"] . " Singular Label", "Functions"),
+          'add_new'             => __('Add ' . $val["single"]),
+          'add_new_item'        => __('Add New ' . $val["single"]),
+          'edit'                => __('Edit'),
+          'edit_item'           => __('Edit ' . $val["single"]),
+          'new_item'            => __('New ' . $val["single"]),
+          'view'                => __('View ' . $val["single"]),
+          'view_item'           => __('View ' . $val["single"]),
+          'search_items'        => __('Search ' . $val["plural"]),
+          'not_found'           => __('No ' . $val["plural"] . ' Found'),
+          'not_found_in_trash'  => __('No ' . $val["plural"] . ' Found in Trash'),
+          'parent'              => __('Parent ' . $val["single"]),
+        )
+      )
+    );
+  }
+}
+
+// Add Options Page /////////////////////////////////////
+
+$args = array(
+  'page_title' => 'Misc Fields'
+);
+
+if (function_exists('acf_add_options_page')) {
+  acf_add_options_page($args);
+}
+
+// Change Backend Menu ///////////////////////////////////////////////
+
+add_action( 'admin_menu', 'edit_admin_menus' );
+function edit_admin_menus() {
+  remove_menu_page('edit-comments.php');
+  remove_submenu_page('options-general.php','options-discussion.php');
+  remove_submenu_page('options-general.php','options-writing.php');
+}
+
+function custom_menu_order($menu_ord) {
+  if (!$menu_ord) return true;
+
+  // Remove ACF Options
+  $menu = 'admin.php?page=acf-options-misc-fields';
+  $menu_ord = array_diff($menu_ord, array( $menu ));
+
+  return array(
+    'index.php',                                // Dashboard
+    'upload.php',                               // Media
+    'edit.php?post_type=page',                  // Pages
+    'separator1',
+    'acf-options-misc-fields',                  // Misc Fields
+    'edit.php',                                 // Posts
+    'edit.php?post_type=work',                  // Work
+    'edit.php?post_type=services',              // Skills
+    'separator2',
+    'themes.php',                               // Appearance
+    'plugins.php',                              // Plugins
+    'users.php',                                // Users
+    'tools.php',                                // Tools
+    'options-general.php',                      // Settings
+  );
+}
+
+add_filter('custom_menu_order', 'custom_menu_order');
+add_filter('menu_order', 'custom_menu_order', 99);
+

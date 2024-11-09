@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template part for displaying the footer content
  *
@@ -9,44 +10,24 @@
 
 ?>
 
-<footer id="colophon">
+<footer class="w-full justify-center text-white">
 
-	<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
-		<aside role="complementary" aria-label="<?php esc_attr_e( 'Footer', 'greenscapes' ); ?>">
-			<?php dynamic_sidebar( 'sidebar-1' ); ?>
-		</aside>
-	<?php endif; ?>
+  <div class="bg-primary px-4 relative mx-auto w-full max-w-[1440px]">
+    <div class="flex w-full flex-wrap justify-between gap-6 py-6 max-md:flex-col">
 
-	<?php if ( has_nav_menu( 'menu-2' ) ) : ?>
-		<nav aria-label="<?php esc_attr_e( 'Footer Menu', 'greenscapes' ); ?>">
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-2',
-					'menu_class'     => 'footer-menu',
-					'depth'          => 1,
-				)
-			);
-			?>
-		</nav>
-	<?php endif; ?>
+      <div class="flex w-full flex-wrap justify-between gap-6 py-6 max-md:flex-col">
+        <div class="flex flex-col items-start justify-start gap-6 xl:flex-1">
+          <img class="max-w-[150px] md:max-w-[200px] block" src="/wp-content/themes/greenscapes/theme/logo-alpha.webp" alt="Logo" />
+        </div>
+        <!-- Footer Navigation -->
+        <?php wp_nav_menu(array('theme_location' => 'nav', 'menu_id' => 'footer_nav', 'container' => false)); ?>
+      </div>
 
-	<div>
-		<?php
-		$greenscapes_blog_info = get_bloginfo( 'name' );
-		if ( ! empty( $greenscapes_blog_info ) ) :
-			?>
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>,
-			<?php
-		endif;
+    </div>
 
-		/* translators: 1: WordPress link, 2: WordPress. */
-		printf(
-			'<a href="%1$s">proudly powered by %2$s</a>.',
-			esc_url( __( 'https://wordpress.org/', 'greenscapes' ) ),
-			'WordPress'
-		);
-		?>
-	</div>
-
-</footer><!-- #colophon -->
+  </div>
+  <div class="bg-secondary py-6 px-4 text-sm">
+    <p>@ <?php echo date("Y"); ?>
+      All Rights Reserved</p>
+  </div>
+</footer>
