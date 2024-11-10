@@ -112,8 +112,9 @@ h6 {
 	@apply mt-4;
 }
 
-.btn {
-	@apply bg-primary py-4 px-12 inline-block mt-6 text-white hover:bg-secondary transition rounded-full;
+.btn,
+[type="submit"] {
+	@apply cursor-pointer bg-primary py-4 px-12 inline-block mt-6 text-white hover:bg-secondary transition rounded-full;
 }
 
 #icon img {
@@ -122,4 +123,9 @@ h6 {
 
 img.object-cover {
 	@apply max-w-full w-full h-full;
+}
+
+form input,
+form textarea {
+	@apply rounded-2xl px-6 py-3;
 }

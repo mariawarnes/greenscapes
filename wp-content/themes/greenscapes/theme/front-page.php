@@ -23,15 +23,7 @@ get_header(); ?>
   </div>
 </section>
 
-<section id="intro" class="py-6 text-center text-xl">
-  <div class="container mx-auto">
-    <?php
-    if (get_the_content()) {
-      the_content();
-    }
-    ?>
-  </div>
-</section>
+<?php get_template_part('template-parts/intro'); ?>
 
 <section>
   <div class="container mx-auto">

@@ -241,13 +241,13 @@ function create_taxonomy()
       "for"    => "work",
       "single" => "Work",
       "plural" => "Work",
-      "slug"   => "work"
+      "slug"   => "our-work"
     ),
     "services" => array(
       "for"    => "services",
       "single" => "Service",
       "plural" => "Services",
-      "slug"   => "services"
+      "slug"   => "our-services"
     )
   );
 

@@ -1,4 +1,4 @@
-<li class="flex lg:flex-row flex-col w-full justify-between text-left my-6 bg-white overflow-hidden rounded-3xl">
+<li class="flex lg:flex-row flex-col w-full justify-between text-left mb-6 bg-white overflow-hidden rounded-3xl">
   <div class="p-4 lg:p-6 max-lg:mb-4 lg:w-1/2 lg:h-auto">
     <div class="flex flex-row items-center mb-4 justify-left">
       <div id="icon" class="rounded-full bg-primary mr-4 p-4 text-xl">

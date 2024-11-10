@@ -9,7 +9,7 @@
       <ul class="columns-2 gap-6">
 
         <?php $query = new WP_Query(array(
-          'post_type'       => 'services',
+          'post_type'       => 'work',
           'posts_per_page'  => -1
         ));
 
@@ -18,7 +18,7 @@
           setup_postdata($post);
 
           // Include the reusable template part.
-          get_template_part('template-parts/services-item');
+          get_template_part('template-parts/work-item');
         }; ?>
       </ul>
       <?php
