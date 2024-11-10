@@ -21,8 +21,11 @@ h3,
 h4,
 h5,
 h6 {
-	@apply !text-foreground font-serif;
+	@apply text-foreground font-serif;
 }
+
+/* Desktop Menu */
+
 #desktop_nav {
 	@apply flex space-x-4;
 }
@@ -53,6 +56,7 @@ h6 {
 }
 
 /* Mobile Menu */
+
 #nav_mobile a {
 	@apply text-white hover:text-white/60 transition;
 }
@@ -76,6 +80,46 @@ h6 {
 	@apply flex w-full flex-col flex-wrap justify-end gap-8 md:flex-row lg:inline-flex lg:flex-1 lg:flex-row;
 }
 
-/* #footer_nav {
-	@apply flex max-w-[170px] flex-col gap-3 lg:w-[140px];
-} */
+#masthead {
+	position: absolute;
+	border-bottom: white 1px solid;
+	z-index: 1;
+}
+
+#hero {
+	@apply bg-blue-400 bg-center relative bg-cover min-h-[80vh] bg-blend-multiply;
+}
+
+#hero .content {
+	top: 50%;
+	transform: translateY(-50%);
+	@apply max-w-full md:max-w-2xl flex flex-col items-center justify-center left-0 right-0 mx-auto leading-normal absolute;
+}
+
+#hero .content h2 {
+	@apply leading-normal px-4 text-center text-3xl md:text-5xl md:leading-normal text-white;
+}
+
+#intro {
+	@apply py-20 px-4;
+}
+
+#intro h3 {
+	@apply text-4xl mb-6;
+}
+
+#intro p {
+	@apply mt-4;
+}
+
+.btn {
+	@apply bg-primary py-4 px-12 inline-block mt-6 text-white hover:bg-secondary transition rounded-full;
+}
+
+#icon img {
+	@apply invert;
+}
+
+img.object-cover {
+	@apply max-w-full w-full h-full;
+}

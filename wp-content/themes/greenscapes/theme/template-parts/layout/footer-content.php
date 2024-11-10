@@ -10,9 +10,9 @@
 
 ?>
 
-<footer class="w-full justify-center text-white">
+<footer class="bg-primary w-full justify-center text-white">
 
-  <div class="bg-primary px-4 relative mx-auto w-full max-w-[1440px]">
+  <div class="px-4 relative mx-auto w-full max-w-screen-2xl">
     <div class="flex w-full flex-wrap justify-between gap-6 py-6 max-md:flex-col">
 
       <div class="flex w-full flex-wrap justify-between gap-6 py-6 max-md:flex-col">

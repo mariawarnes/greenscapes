@@ -1,11 +1,11 @@
-<header id="masthead" class="fixed top-0 bg-cover bg-center relative" style="background-image: url('/wp-content/themes/greenscapes/theme/hero-blue.webp');">
-  <div class="container border-b-1 mx-auto px-4 flex items-center justify-between py-4">
+<header id="masthead" class="w-full top-0">
+  <div class="container mx-auto px-4 flex items-center justify-between py-4">
     <!-- Site Title / Logo -->
-    <div>
+    <a href="/">
       <h1 aria-label="<?php bloginfo('name'); ?>">
         <img class="max-w-[150px] md:max-w-[200px]" src="/wp-content/themes/greenscapes/theme/logo-alpha.webp" />
       </h1>
-    </div>
+    </a>
 
     <!-- Desktop Navigation -->
     <nav id="nav_primary" class="hidden md:flex">
