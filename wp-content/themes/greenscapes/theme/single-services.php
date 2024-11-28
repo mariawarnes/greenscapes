@@ -6,7 +6,7 @@
   <div class="container mx-auto">
 
     <div class="text-center max-md:mx-4">
-      <ul class="columns-2 gap-6 mb-12">
+      <ul class="columns-1 sm:columns-2 gap-6 mb-12">
 
         <?php $query = new WP_Query(array(
           'post_type'      => 'work',
